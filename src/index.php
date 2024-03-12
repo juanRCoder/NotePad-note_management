@@ -1,6 +1,6 @@
 <?php
-session_start();
 include '../JWTHandler.php';
+include '../env.php';
 
 $secret = $_SESSION["SECRET"];
 $servidor = $_SESSION["SERVER"];
@@ -28,8 +28,8 @@ function registerUser($username, $email, $password, $password_confirm, $secret, 
 
         // Verificar si el usuario ya existe
         $stmt_check = $conexion->prepare("SELECT COUNT(*) FROM usuarios WHERE username = :username OR correo = :email");
-        $stmt_check->bindParam(':username', $username);
-        $stmt_check->bindParam(':email', $email);
+        $stmt_check->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt_check->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt_check->execute();
 
         $user_exists = $stmt_check->fetchColumn();
@@ -42,9 +42,9 @@ function registerUser($username, $email, $password, $password_confirm, $secret, 
         // Insertar el nuevo usuario en la base de datos
         $sql = "INSERT INTO usuarios (username, password, correo) VALUES (:username, :password, :email)";
         $stmt = $conexion->prepare($sql);
-        $stmt->bindParam(':username', $user_data["username"]);
-        $stmt->bindParam(':password', $user_data["password"]);
-        $stmt->bindParam(':email', $user_data["email"]);
+        $stmt->bindParam(':username', $user_data["username"], PDO::PARAM_STR);
+        $stmt->bindParam(':password', $user_data["password"], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $user_data["email"], PDO::PARAM_STR);
         $stmt->execute();
 
         return "<p style='color: green; margin: 0px;'> Registrado Correctamente </p>";

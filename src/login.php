@@ -14,7 +14,7 @@ function loginUser($username, $password, $secret, $servidor, $db, $usuario, $pwd
         $conexion = new PDO("mysql:host=$servidor;dbname=$db", $usuario, $pwd);
 
         $stmt = $conexion->prepare("SELECT password FROM usuarios WHERE username = :username");
-        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
 
         $stored_password = $stmt->fetchColumn();
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <br>
                 <input type="submit" name="login" value="Iniciar Sesión">
             </form>
-            <a href="register.php">in Register</a>
+            <a href="index.php">in Register</a>
         </div>
     </body>
 
