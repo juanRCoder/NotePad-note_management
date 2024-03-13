@@ -64,17 +64,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['note'])) {
 }
 
 
+//CONSULTA PARA ACTUALIZAR LA NOTA SELECCIONADA
+if ($_SERVER['REQUEST_METHOD'] === 'POST' &&  isset($_POST['idNote'])) {
+
+    $updateContent = $_POST['noteUpdate'];
+    $idNote = $_POST['idNote'];
+
+    try {
+        // Realizar la conexión a la base de datos
+        $conexion = new PDO("mysql:host=$servidor;dbname=$db", $usuario, $pwd);
+
+        // CONSULTA PARA ACTUALIZAR LA NOTA
+        $stmt_three = $conexion->prepare("UPDATE notas SET note = :noteContent WHERE id = :idNote");
+        $stmt_three->bindParam(":noteContent", $updateContent, PDO::PARAM_STR);
+        $stmt_three->bindParam(":idNote", $idNote, PDO::PARAM_INT);
+        $stmt_three->execute();
+
+    } catch (PDOException $e) {
+        echo "Error al actualizar la nota: " . $e->getMessage();
+    }
+}
+
+
+
 //CONSULTA PARA OBTENER TODAS LAS NOTAS ASOCIADAS AL USUARIO ACTUAL
 try {
     $conexion = new PDO("mysql:host=$servidor;dbname=$db", $usuario, $pwd);
-    $getData = $conexion->prepare("SELECT note FROM notas WHERE id_user = :id");
+    $getData = $conexion->prepare("SELECT note, id FROM notas WHERE id_user = :id");
     $getData->bindParam(':id', $idUser, PDO::PARAM_INT);
     $getData->execute();
-    $data = $getData->fetchAll(PDO::FETCH_COLUMN);
+    $data = $getData->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -95,23 +119,40 @@ try {
         <div class="boxInfo">
             <?php
             if ($decoded_token) {
-                echo "<p>Bienvenido, $username!</p>";
+                echo "<p>Welcome, $username!</p>";
                 echo "<a href='index.php' onclick='return confirm(\"¿Estás seguro de cerrar sesión?\")'>Logout</a>";
             }
             ?>
         </div>
-        <button class="ShowBoxAdd">Add Note</button>
-        <form class="BoxAddNote" method="POST">
+        <button class="addShowBox">Add Note</button>
+        <form class="addNoteBox" method="POST">
             <textarea class="textNote" name="note" id="note" placeholder="write note.."></textarea>
             <div>
-                <button class="SubmitNote">Create</button>
-                <button class="HiddenBoxAdd">Leave</button>
+                <button class="submitNote">Create</button>
+                <button class="hiddenBox">Leave</button>
+            </div>
+        </form>
+        <form class="updateNoteBox" method="POST">
+            <textarea class="textNote" name="noteUpdate" id="note"></textarea>
+            <input class="sendIdNote" type="hidden" name="idNote" value="">
+            <div>
+                <button class="updateNote">Update</button>
+                <button class="hiddenBox">Leave</button>
             </div>
         </form>
         <?php
         if (!empty($data)) {
-            foreach ($data as $nota) {
-                echo "<p>$nota</p>";
+            foreach ($data as $row) {
+                $idNote = $row['id'];
+                $nota = $row['note'];
+                echo "<div class='boxNote' id='boxNote_$idNote'>
+                <p class='nota'>$nota</p>
+                <p id='idNota' style='display: none;'>$idNote</p>
+                <div>
+                    <button class='btnUpdate'>Update</button>
+                    <button>Delete</button>
+                </div>
+            </div>";
             }
         } else {
             echo "<p>No tienes notas almacenadas.</p>";
