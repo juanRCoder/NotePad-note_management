@@ -1,2 +1,6 @@
 env.php
 node_modules/
+src/styles.css
+src/styles.css.map
+src/variables.css
+src/variables.css.map
