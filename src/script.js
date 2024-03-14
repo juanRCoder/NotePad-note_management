@@ -14,6 +14,7 @@ $(document).ready(() => {
   });
 
   $(".btnUpdate").click(function () {
+    //encontrar el elemento con clase 'boxNote' mas cercano y buscar los id
     let notaValue = $(this).closest(".boxNote").find(".nota").text();
     let idnota = $(this).closest(".boxNote").find("#idNota").text();
     console.log(idnota);
@@ -22,8 +23,15 @@ $(document).ready(() => {
     $(".updateNoteBox").show();
   });
 
-  // $(".updateNote").click(function () {
-  //   alert("HOLA MUNDO");
-  //   location.reload();
-  // });
+  $(".btnDelete").click(function (event) {
+    if (!confirm("¿Estás seguro de eliminar la nota?")) {
+      // Si el usuario cancela, detener la acción predeterminada del enlace
+      event.preventDefault();
+    } else {
+      let idDelete = $(this).closest(".boxNote").find("#idNota").text();
+      console.log(idDelete);
+      $("#idDelete").val(idDelete);
+      $(".deleteNoteBox").submit();
+    }
+  });
 });

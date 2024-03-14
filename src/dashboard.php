@@ -42,8 +42,8 @@ if ($token) {
     echo "Token no encontrado.";
 }
 
+//POST - CREATE
 //CONSULTA POST PARA CREAR UNA NUEVA NOTA
-// Verificar si la solicitud es una solicitud POST y si tiene datos de nota
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['note'])) {
     // Obtener la nota de la solicitud
     $noteContent = $_POST['note'];
@@ -63,9 +63,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['note'])) {
     }
 }
 
+//DELETE - DELETE
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idDelete'])) {
+    $idDelete = $_POST['idDelete'];
 
+    try {
+        // DELETE FROM animales WHERE id = 4;
+        $conexion = new PDO("mysql:host=$servidor;dbname=$db", $usuario, $pwd);
+        $stmt_four = $conexion->prepare("DELETE FROM notas WHERE id = :idDelete");
+        $stmt_four->bindParam(':idDelete', $idDelete, PDO::PARAM_INT);
+        $stmt_four->execute();
+
+    }catch(PDOException $e){
+        echo "Error al eliminar nota: " . $e->getMessage();
+    }
+}
+
+//PUT - UPDATE
 //CONSULTA PARA ACTUALIZAR LA NOTA SELECCIONADA
-if ($_SERVER['REQUEST_METHOD'] === 'POST' &&  isset($_POST['idNote'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idNote'])) {
 
     $updateContent = $_POST['noteUpdate'];
     $idNote = $_POST['idNote'];
@@ -85,8 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&  isset($_POST['idNote'])) {
     }
 }
 
-
-
+//GET - READ
 //CONSULTA PARA OBTENER TODAS LAS NOTAS ASOCIADAS AL USUARIO ACTUAL
 try {
     $conexion = new PDO("mysql:host=$servidor;dbname=$db", $usuario, $pwd);
@@ -125,6 +140,7 @@ try {
             ?>
         </div>
         <button class="addShowBox">Add Note</button>
+        <!-- CREATE NOTE -->
         <form class="addNoteBox" method="POST">
             <textarea class="textNote" name="note" id="note" placeholder="write note.."></textarea>
             <div>
@@ -132,6 +148,7 @@ try {
                 <button class="hiddenBox">Leave</button>
             </div>
         </form>
+        <!-- UPDDATE NOTE -->
         <form class="updateNoteBox" method="POST">
             <textarea class="textNote" name="noteUpdate" id="note"></textarea>
             <input class="sendIdNote" type="hidden" name="idNote" value="">
@@ -140,17 +157,22 @@ try {
                 <button class="hiddenBox">Leave</button>
             </div>
         </form>
+        <!-- DELETE NOTE -->
+        <form class="deleteNoteBox" style='display: none' method="post">
+            <input type="hidden" name="idDelete" id="idDelete" value="" />
+        </form>
+        <!-- READ NOTE -->
         <?php
         if (!empty($data)) {
             foreach ($data as $row) {
                 $idNote = $row['id'];
                 $nota = $row['note'];
-                echo "<div class='boxNote' id='boxNote_$idNote'>
+                echo "<div class='boxNote'>
                 <p class='nota'>$nota</p>
-                <p id='idNota' style='display: none;'>$idNote</p>
+                <p style='display: none;' id='idNota'>$idNote</p>
                 <div>
                     <button class='btnUpdate'>Update</button>
-                    <button>Delete</button>
+                    <button class='btnDelete'>Delete</button>
                 </div>
             </div>";
             }

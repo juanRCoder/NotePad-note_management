@@ -47,7 +47,10 @@ function registerUser($username, $email, $password, $password_confirm, $secret, 
         $stmt->bindParam(':email', $user_data["email"], PDO::PARAM_STR);
         $stmt->execute();
 
-        return "<p style='color: green; margin: 0px;'> Registrado Correctamente </p>";
+        $token = JWTHandler::encodeJWT($user_data, $secret);
+        setcookie("TOKEN", $token, time() + 3600, "/");
+        header("Location: dashboard.php");
+
 
     } catch (PDOException $error) {
         // Error de conexión o inserción
@@ -80,7 +83,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>NotePad: gestor de notas</title>
+    <link rel="icon" href="assets/favicon.ico">
 </head>
 
 <body>
