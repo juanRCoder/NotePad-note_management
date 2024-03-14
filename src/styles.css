@@ -1,13 +1,15 @@
-.noteContainer {
-    outline: 1px solid red;
+body {
+  background-image: url(assets/bg_notepad.jpg);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.boxInfo {
-    display: flex;
-    outline: 1px solid yellow;
-}
-.textNote {
-    outline: 1px solid blue;
-    border: none;
-    height: 120px !important;
-    width: 70% !important;
-}
+body .boxRegister {
+  outline: 1px solid #000;
+  max-width: 1365px;
+}/*# sourceMappingURL=styles.css.map */

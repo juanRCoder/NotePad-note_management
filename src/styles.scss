@@ -1,0 +1,19 @@
+@use 'variables.scss';
+// variables.$bg-blue;
+
+body {
+    background-image: url(assets/bg_notepad.jpg);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+  .boxRegister {
+    outline: 1px solid #000;
+    max-width: 1365px;
+  }
+}
