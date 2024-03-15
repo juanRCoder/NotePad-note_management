@@ -9,7 +9,7 @@ $pwd = $_SESSION["PWD"];
 $db = $_SESSION["DB"];
 
 // Intenta obtener el token de la cookie
-$token = isset($_COOKIE["TOKEN"]) ? $_COOKIE["TOKEN"] : null;
+$token = isset ($_COOKIE["TOKEN"]) ? $_COOKIE["TOKEN"] : null;
 $secret = $_SESSION["SECRET"];
 
 
@@ -44,7 +44,7 @@ if ($token) {
 
 //POST - CREATE
 //CONSULTA POST PARA CREAR UNA NUEVA NOTA
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['note'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['note'])) {
     // Obtener la nota de la solicitud
     $noteContent = $_POST['note'];
 
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['note'])) {
 }
 
 //DELETE - DELETE
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idDelete'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['idDelete'])) {
     $idDelete = $_POST['idDelete'];
 
     try {
@@ -74,14 +74,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idDelete'])) {
         $stmt_four->bindParam(':idDelete', $idDelete, PDO::PARAM_INT);
         $stmt_four->execute();
 
-    }catch(PDOException $e){
+    } catch (PDOException $e) {
         echo "Error al eliminar nota: " . $e->getMessage();
     }
 }
 
 //PUT - UPDATE
 //CONSULTA PARA ACTUALIZAR LA NOTA SELECCIONADA
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idNote'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['idNote'])) {
 
     $updateContent = $_POST['noteUpdate'];
     $idNote = $_POST['idNote'];
@@ -123,65 +123,80 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css" />
-    <title>NotePad</title>
+    <title>NotePad: gestor de notas</title>
+    <link rel="icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
+<style>
+    body {
+        display: block;
+    }
+</style>
 
 <body>
-    <h1>NotePad:</h1>
-    <h3>Gestor de notas</h3>
-    <article class="noteContainer">
-        <div class="boxInfo">
-            <?php
-            if ($decoded_token) {
-                echo "<p>Welcome, $username!</p>";
-                echo "<a href='index.php' onclick='return confirm(\"¿Estás seguro de cerrar sesión?\")'>Logout</a>";
-            }
-            ?>
+    <article>
+        <div class="titleApp">
+            <h1>NotePad:</h1>
+            <h3>note manager</h3>
         </div>
-        <button class="addShowBox">Add Note</button>
-        <!-- CREATE NOTE -->
-        <form class="addNoteBox" method="POST">
-            <textarea class="textNote" name="note" id="note" placeholder="write note.."></textarea>
-            <div>
-                <button class="submitNote">Create</button>
-                <button class="hiddenBox">Leave</button>
+        <article class="noteContainer">
+            <div class="boxInfo">
+                <?php
+                if ($decoded_token) {
+                    echo "<p>Welcome, <b style='color: turquoise;'>$username!</b></p>";
+                    echo "<button><a href='index.php' onclick='return confirm(\"¿Estás seguro de cerrar sesión?\")'>Logout</a></button>";
+                }
+                ?>
             </div>
-        </form>
-        <!-- UPDDATE NOTE -->
-        <form class="updateNoteBox" method="POST">
-            <textarea class="textNote" name="noteUpdate" id="note"></textarea>
-            <input class="sendIdNote" type="hidden" name="idNote" value="">
-            <div>
-                <button class="updateNote">Update</button>
-                <button class="hiddenBox">Leave</button>
+            <div class="boxAdd">
+                <button class="addShowBox">Add Note</button>
             </div>
-        </form>
-        <!-- DELETE NOTE -->
-        <form class="deleteNoteBox" style='display: none' method="post">
-            <input type="hidden" name="idDelete" id="idDelete" value="" />
-        </form>
-        <!-- READ NOTE -->
-        <?php
-        if (!empty($data)) {
-            foreach ($data as $row) {
-                $idNote = $row['id'];
-                $nota = $row['note'];
-                echo "<div class='boxNote'>
+            <!-- CREATE NOTE -->
+            <form class="addNoteBox" method="POST">
+                <textarea class="textNote" name="note" id="note" placeholder="Maximo (100 palabras..)"></textarea>
+                <div class="boxSend">
+                    <button class="submitNote">Create</button>
+                    <button class="hiddenBox">Leave</button>
+                </div>
+            </form>
+            <!-- UPDDATE NOTE -->
+            <form class="updateNoteBox" method="POST">
+                <textarea class="textNote" name="noteUpdate" id="note"></textarea>
+                <input class="sendIdNote" type="hidden" name="idNote" value="">
+                <div>
+                    <button class="updateNote">Update</button>
+                    <button class="hiddenBox">Leave</button>
+                </div>
+            </form>
+            <!-- DELETE NOTE -->
+            <form class="deleteNoteBox" style='display: none' method="post">
+                <input type="hidden" name="idDelete" id="idDelete" value="" />
+            </form>
+            <!-- READ NOTE -->
+            <?php
+            if (!empty ($data)) {
+                foreach ($data as $row) {
+                    $idNote = $row['id'];
+                    $nota = $row['note'];
+                    echo "<div class='boxNote'>
                 <p class='nota'>$nota</p>
                 <p style='display: none;' id='idNota'>$idNote</p>
-                <div>
+                <div class='boxOptions'>
                     <button class='btnUpdate'>Update</button>
                     <button class='btnDelete'>Delete</button>
                 </div>
             </div>";
+                }
+            } else {
+                echo "<p>No tienes notas almacenadas.</p>";
             }
-        } else {
-            echo "<p>No tienes notas almacenadas.</p>";
-        }
-        ?>
+            ?>
+        </article>
+        <script src="script.js"></script>
     </article>
-    <script src="script.js"></script>
 </body>
 
 </html>

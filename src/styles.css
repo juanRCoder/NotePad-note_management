@@ -1,0 +1,218 @@
+body {
+  background-image: url(assets/bg_notepad.jpg);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, "sans-serif";
+}
+.boxRegister {
+  outline: none !important;
+  background-color: #00000066;
+  width: 400px;
+  max-width: 800px;
+  max-height: 1000px;
+}
+.boxRegister_h2 {
+  margin: 25px 0px;
+  text-align: center;
+  color: #fff;
+  font-size: 41px;
+}
+form {
+  width: 90%;
+  margin: auto;
+}
+form > .boxInput {
+  margin: 0px 0px 25px 0px;
+}
+form > .boxInput > label {
+  display: block;
+  color: #fff;
+  padding-bottom: 10px;
+}
+form > .boxInput > input {
+  width: 99%;
+  height: 25px;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+}
+.sendPost {
+  width: 100%;
+  height: 45px;
+  font-size: x-large;
+  margin-top: 14px;
+  border: none;
+  outline: none;
+  background-color: #05121b;
+  color: #fff;
+  cursor: pointer;
+}
+.sendPost:hover {
+  background-color: #071a27;
+}
+.linkRegisterLogin {
+  text-align: center;
+  padding: 30px 0px 20px 0px;
+}
+.linkRegisterLogin > a {
+  color: #fff;
+  font-weight: 700;
+}
+.message {
+  color: #f75656;
+  margin: 0px auto;
+  width: 90%;
+  font-size: 14px;
+  padding: 0px 0px 13px 0px;
+}
+@media (max-width: 430px) {
+  .boxRegister {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  form {
+    margin: 0px;
+  }
+}
+
+/* Dashboard */
+.titleApp {
+  width: 95%;
+  margin: auto;
+  padding-top: 33px;
+}
+.titleApp > h1 {
+  color: #fff;
+  display: inline-block;
+  font-size: 50px;
+  margin: 0px;
+}
+.titleApp > h3 {
+  color: #fff;
+  display: inline-block;
+  margin: 0px;
+}
+.noteContainer {
+  background-color: #00000066;
+  width: 95%;
+  margin: auto;
+  padding-bottom: 1px;
+  border-radius: 5px;
+}
+.boxInfo {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin: auto;
+  padding-top: 25px;
+}
+.boxInfo > p {
+  color: #fff;
+  font-size: 25px;
+  margin: 0;
+}
+.boxInfo > button > a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #fff;
+}
+button {
+  outline: none;
+  border: none;
+  background-color: #05121b;
+  cursor: pointer;
+  padding: 10px 35px;
+  border-radius: 8px;
+}
+.boxAdd {
+  width: 95%;
+  margin: auto;
+  padding: 15px 0px 15px 0px;
+}
+button.addShowBox {
+  font-size: 18px;
+  cursor: pointer;
+  color: #fff;
+}
+.boxNote {
+  outline: 1px solid white;
+  width: 95%;
+  margin: auto;
+  display: flex;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+.boxNote > .nota {
+  width: 90%;
+  font-size: 14px;
+  color: #fff;
+  margin: 10px 0px 10px 10px;
+  display: flex;
+  align-items: center;
+}
+.boxOptions,
+.boxSend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 15%;
+  margin: 10px;
+}
+.boxOptions > .btnUpdate,
+.boxOptions > .btnDelete {
+  width: 85%;
+  margin: 0px 0px 10px 0px;
+  color: #fff;
+  font-size: 18px;
+}
+.boxOptions > .btnDelete {
+  margin: 0px 0px 0px 0px;
+}
+.boxOptions > .btnUpdate {
+  background-color: #070f2b;
+}
+form.addNoteBox {
+  width: 95%;
+  margin: auto;
+  display: flex;
+  margin-bottom: 20px;
+}
+textarea#note {
+  border: none;
+  outline: none;
+  height: 103px;
+  width: 90%;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #fff9;
+  padding: 10px 0px 10px 10px;
+  resize: none;
+}
+.boxSend {
+  justify-content: flex-start;
+  margin: 0px 10px 0px 10px;
+}
+button.hiddenBox,
+button.submitNote {
+  width: 85%;
+  color: #fff;
+  font-size: 18px;
+}
+button.submitNote {
+  margin-bottom: 10px;
+}
