@@ -12,7 +12,7 @@ function registerUser($username, $email, $password, $password_confirm, $secret, 
 {
     // Verificar si las contraseñas coinciden
     if ($password !== $password_confirm) {
-        return "<p style='color: red; margin: 0px;'> Las contraseñas no coinciden. </p>";
+        return "<p class='message'> Las contraseñas no coinciden. </p>";
     }
     //Hasheo de contraseña
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -36,7 +36,7 @@ function registerUser($username, $email, $password, $password_confirm, $secret, 
 
         if ($user_exists > 0) {
             // El usuario ya existe, devuelve un mensaje de error
-            return "<p style='color: red; margin: 0px;'> El usuario o el correo electrónico ya está registrado. </p>";
+            return "<p class='message' > El usuario o el correo electrónico ya está registrado. </p>";
         }
 
         // Insertar el nuevo usuario en la base de datos
@@ -83,32 +83,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>NotePad: gestor de notas</title>
-    <link rel="icon" href="assets/favicon.ico">
-</head>
+    <link rel="stylesheet" href="styles.css">
 
+    <link rel="icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
 <body>
     <div class="boxRegister">
-        <h2>Registro de Usuario</h2>
+        <h2 class="boxRegister_h2">Register</h2>
         <?php if ($result)
             echo $result ?>
             <form action="index.php" method="post">
-                <label for="nombre_registro">Nombre de usuario:</label>
-                <input type="text" name="nombre" id="nombre_registro" required>
-                <br>
-                <label for="email_registro">Correo electrónico:</label>
-                <input type="email" name="email" id="email_registro" required>
-                <br>
-                <label for="password_registro">Contraseña:</label>
-                <input type="password" name="password" id="password_registro" required>
-                <br>
-                <label for="password_confirm">Confirmar contraseña:</label>
-                <input type="password" name="confirm_password" id="password_confirm" required>
-                <br>
-                <input type="submit" name="register" value="Registrar">
+                <div class="boxInput">
+                    <label for="nombre_registro">Username</label>
+                    <input type="text" name="nombre" id="nombre_registro" required>
+                </div>
+                <div class="boxInput">
+                    <label for="email_registro">Gmail</label>
+                    <input type="email" name="email" id="email_registro" required>
+                </div>
+                <div class="boxInput">
+                    <label for="password_registro">Password</label>
+                    <input type="password" name="password" id="password_registro" required>
+                </div>
+                <div class="boxInput">
+                    <label for="password_confirm">Confirm password</label>
+                    <input type="password" name="confirm_password" id="password_confirm" required>
+                </div>
+                <input class="sendPost" type="submit" name="register" value="sign up">
             </form>
-            <a href="login.php">in Login</a>
+            <div class="linkRegisterLogin">
+                <a href="login.php">in Login</a>
+            </div>
         </div>
     </body>
 
