@@ -1,5 +1,6 @@
 body {
   background-image: url(assets/bg_notepad.jpg);
+  background-color: #05121b;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -18,7 +19,7 @@ body {
   max-height: 1000px;
 }
 .boxRegister_h2 {
-  margin: 25px 0px;
+  margin: 25px 0px 10px;
   text-align: center;
   color: #fff;
   font-size: 41px;
@@ -90,29 +91,42 @@ form > .boxInput > input {
 }
 
 /* Dashboard */
+.appContainer {
+  max-width: 1320px;
+  width: 90%;
+  margin: 0 auto 15px auto;
+}
+
 .titleApp {
   width: 95%;
   margin: auto;
   padding-top: 33px;
 }
-.titleApp > h1 {
-  color: #fff;
-  display: inline-block;
-  font-size: 50px;
-  margin: 0px;
-}
+
+.titleApp > h1,
 .titleApp > h3 {
   color: #fff;
   display: inline-block;
-  margin: 0px;
+  margin: 0;
 }
+
+.titleApp > h1 {
+  font-size: 50px;
+}
+
+.titleApp > h3 {
+  font-size: 30px;
+}
+
 .noteContainer {
   background-color: #00000066;
   width: 95%;
   margin: auto;
   padding-bottom: 1px;
   border-radius: 5px;
+  margin-bottom: 30px;
 }
+
 .boxInfo {
   display: flex;
   justify-content: space-between;
@@ -120,11 +134,13 @@ form > .boxInput > input {
   margin: auto;
   padding-top: 25px;
 }
+
 .boxInfo > p {
   color: #fff;
   font-size: 25px;
   margin: 0;
 }
+
 .boxInfo > button > a {
   text-decoration: none;
   font-size: 20px;
@@ -132,26 +148,30 @@ form > .boxInput > input {
   display: flex;
   align-items: center;
 }
+
 button {
   outline: none;
   border: none;
   background-color: #05121b;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   padding: 9px 20px;
   border-radius: 8px;
 }
-.boxAdd {
-  width: 95%;
-  margin: auto;
-  padding: 15px 0px 15px 0px;
-}
-button.addShowBox {
+
+.button-text {
   font-size: 20px;
   cursor: pointer;
   color: #fff;
-  display: flex;
-  align-items: center;
 }
+
+.boxAdd {
+  width: 95%;
+  margin: auto;
+  padding: 15px 0;
+}
+
 .boxNote {
   outline: 1px solid white;
   width: 95%;
@@ -160,14 +180,16 @@ button.addShowBox {
   border-radius: 10px;
   margin-bottom: 25px;
 }
+
 .boxNote > .nota {
   width: 90%;
   font-size: 14px;
   color: #fff;
-  margin: 10px 0px 10px 10px;
+  margin: 10px 0 10px 10px;
   display: flex;
   align-items: center;
 }
+
 .boxOptions,
 .boxSend {
   display: flex;
@@ -177,25 +199,31 @@ button.addShowBox {
   width: 15%;
   margin: 10px;
 }
+
 .boxOptions > .btnUpdate,
 .boxOptions > .btnDelete {
-  width: 85%;
-  margin: 0px 0px 10px 0px;
+  width: 90%;
+  margin: 0 0 10px 0;
   color: #fff;
   font-size: 18px;
+  justify-content: center;
 }
+
 .boxOptions > .btnDelete {
-  margin: 0px 0px 0px 0px;
+  margin-bottom: 0;
 }
+
 .boxOptions > .btnUpdate {
   background-color: #070f2b;
 }
+
 form.addNoteBox {
   width: 95%;
   margin: auto;
   display: flex;
   margin-bottom: 20px;
 }
+
 textarea#note {
   border: none;
   outline: none;
@@ -204,27 +232,159 @@ textarea#note {
   border-radius: 10px;
   font-size: 14px;
   background-color: #fff9;
-  padding: 10px 0px 10px 10px;
+  padding: 10px 0 10px 10px;
   resize: none;
 }
+
 .boxSend {
   justify-content: flex-start;
-  margin: 0px 10px 0px 10px;
+  margin: 0 10px 0 10px;
 }
+
 button.hiddenBox,
-button.submitNote {
+button.submitNote,
+button.updateNote {
   width: 85%;
   color: #fff;
   font-size: 18px;
-}
-button.submitNote {
+  justify-content: center;
   margin-bottom: 10px;
 }
+
 .svg {
   display: inline-block;
   width: 25px;
   padding-left: 10px;
 }
+
 p.texto {
   margin: 0;
+  font-size: 20px;
+  color: #fff;
+}
+
+.notNotes {
+  text-align: center;
+  color: #fff;
+}
+
+.boxOptions > .btnUpdate,
+.boxOptions > .btnDelete,
+button.hiddenBox,
+button.submitNote,
+button.updateNote {
+  justify-content: center;
+  width: 93%;
+}
+
+@media (max-width: 800px) {
+  .boxNote > .nota {
+    width: 75%;
+  }
+
+  .boxOptions,
+  .boxSend {
+    width: 21%;
+  }
+}
+
+@media (max-width: 500px) {
+  p.texto {
+    margin: 0;
+    font-size: 0px;
+    color: #fff;
+}
+  .boxNote {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .boxOptions,
+  .boxSend {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .boxNote > .nota {
+    width: 90%;
+    padding: 10px 0px;
+    margin: auto;
+    justify-content: flex-start;
+  }
+
+  button.addShowBox {
+    font-size: 0px;
+    justify-content: center;
+  }
+
+  .boxInfo > button > a,
+  button.addShowBox {
+    font-size: 0px;
+    width: 100%;
+  }
+
+  .svg {
+    padding-left: 0px;
+  }
+
+  button {
+    width: 30%;
+  }
+
+  .boxInfo {
+    align-items: center;
+    width: 90%;
+  }
+
+  .boxInfo > button > a {
+    display: block;
+  }
+
+  .boxAdd {
+    width: 90%;
+  }
+
+  .titleApp {
+    width: 90%;
+    padding-top: 0px;
+  }
+
+  .appContainer {
+    margin: 15px 0px;
+  }
+
+  form.addNoteBox {
+    flex-direction: column;
+    align-items: center;
+    width: 88%;
+  }
+
+  button.hiddenBox,
+  button.submitNote {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+
+  button.submitNote {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  form.updateNoteBox {
+    margin: auto;
+    flex-direction: column;
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  button.updateNote {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  textarea#note {
+    width: 97%;
+  }
 }

@@ -31,7 +31,7 @@ function loginUser($username, $password, $secret, $servidor, $db, $usuario, $pwd
             header("Location: dashboard.php");
 
         } else {
-            return "<p style='color: red; margin: 0px;'> Usuario no registrado o credenciales incorrectas. </p>";
+            return "<p style='color: #fb3232;text-align: center;padding: 0px 0px 14px;margin: auto;width: 90%;font-size: 13px;'> Usuario no registrado o credenciales incorrectas. </p>";
         }
 
     } catch (PDOException $error) {
