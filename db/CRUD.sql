@@ -19,11 +19,24 @@ CREATE TABLE IF NO EXISTS notas(
     FOREIGN KEY(id_user) REFERENCES usuarios(id)
 )
 
--- create note
+-- Create note
 -- :username -> nombre interactivo - registrado
 -- :email -> email interactivo - registrado
 INSERT INTO usuarios (username, password, correo) 
 VALUES (:username, :password, :email)
 
 
--- get note per user:
+-- Read / Get note per user
+-- :id -> notas por usuario logeado 
+SELECT note, id FROM notas WHERE id_user = :id;
+
+
+-- Update note
+-- :noteContent -> seleccion de nota para modificar.
+-- :idNote -> id de la nota a actualizar.
+UPDATE notas SET note = :noteContent WHERE id = :idNote;
+
+
+-- Delete note
+-- :idDelete -> id de la nota a eliminar.
+DELETE FROM notas WHERE id = :idDelete;
