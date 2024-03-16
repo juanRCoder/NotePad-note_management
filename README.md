@@ -1,4 +1,4 @@
-<img src="./src/assets/bannerProject.png" alt="Logo"  width="100%">
+<img src="./src/assets/notePad_banner.png" alt="Logo"  width="100%">
 
 ## NotePad: Gestor de notas
 
