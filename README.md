@@ -4,7 +4,7 @@
 
 Como dice el titulo es un gestor de notas utilizando los 4 pasos fundamentales de gestión, crear, leer, editar y eliminar.
 
-Demo: []()
+Demo: [NotePad-DemoProject](https://www.youtube.com/watch?v=FytfIC_IsOY)
 
 ## 🛠 Tecnologías:
 - Este proyecto fue realizado con las siguientes tecnologias y dependencias:
@@ -57,7 +57,7 @@ Demo: []()
 
 ### Proyecto:
 
-- Demo: []()
+- Demo: [NotePad-DemoProject](https://www.youtube.com/watch?v=FytfIC_IsOY)
 
 ## Licence:
 
